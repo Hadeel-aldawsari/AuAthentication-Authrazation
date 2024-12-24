@@ -44,17 +44,24 @@ public class BlogController {
     }
 
 
-    //Admin
+    @GetMapping("/user/get-my-blogs")
+    public ResponseEntity getMyBlogs(@AuthenticationPrincipal MyUser myuser){
+        return ResponseEntity.status(200).body(blogService.getMyBlogs(myuser.getId()));
+    }
 
+    @GetMapping("/user/get-my-blog-by-id/{blogid}")
+    public ResponseEntity getBlogById(@PathVariable Integer blogid){
+        return ResponseEntity.status(200).body(blogService.getBlogById(blogid));
+    }
+
+
+    //Admin
     @GetMapping("/admin/get-blogs")
     public ResponseEntity getAllBlogs(){
         return ResponseEntity.status(200).body(blogService.getAllBlogs());
     }
 
-    @GetMapping("/admin/get-blog-by-id/{blogid}")
-    public ResponseEntity getBlogById(@PathVariable Integer blogid){
-        return ResponseEntity.status(200).body(blogService.getBlogById(blogid));
-    }
+   
 
 }
 
