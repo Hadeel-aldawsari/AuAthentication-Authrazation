@@ -58,16 +58,24 @@ public class BlogService {
         return blog;
     }
 
+    public Blog getBlogById(Integer blogid){
+        Blog blog=blogRepository.findBlogById(blogid);
+        if(blog==null)throw new ApiException("no blog found with this id");
+        return blog;
+    }
+
+    public List<Blog> getMyBlogs(Integer userid){
+        List<Blog> blogs=blogRepository.findBlogsByUserId(userid);
+        if(blogs==null ||  blogs.isEmpty())throw new ApiException("no blogs found");
+        return blogs;
+    }
+
     //Admin
     public List<Blog> getAllBlogs(){
         if(blogRepository.findAll().isEmpty())throw new ApiException("there is no blog posted");
         return blogRepository.findAll();
     }
 
-    public Blog getBlogById(Integer blogid){
-        Blog blog=blogRepository.findBlogById(blogid);
-        if(blog==null)throw new ApiException("no blog found with this id");
-        return blog;
-    }
+
 
 }
