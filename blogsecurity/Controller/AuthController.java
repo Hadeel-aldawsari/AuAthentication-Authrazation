@@ -20,7 +20,7 @@ public class AuthController {
     @PostMapping("/user/register")
     public ResponseEntity Registration(@RequestBody @Valid MyUser myUser){
         authService.Registration(myUser);
-        return ResponseEntity.status(200).body("user registration successfully");
+        return ResponseEntity.status(200).body(new ApiResponse("user registration successfully"));
     }
 
     @PutMapping("/user/update")
